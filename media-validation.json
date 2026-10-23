@@ -1,0 +1,14 @@
+{
+  "frames": 225,
+  "fps": 15,
+  "seconds": 15,
+  "resolution": [
+    800,
+    900
+  ],
+  "gif_infinite_loop": true,
+  "gif_first_last_identical": true,
+  "mp4_full_decode": "passed",
+  "gif_bytes": 1687315,
+  "mp4_bytes": 497048
+}

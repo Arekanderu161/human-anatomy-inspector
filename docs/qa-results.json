@@ -1,0 +1,40 @@
+{
+  "project": "human-anatomy-inspector",
+  "local_url": "http://127.0.0.1:4176/",
+  "remote_website_hosting": false,
+  "browser_checks": {
+    "original_illustration_load": "passed",
+    "all_five_illustration_regions_and_locator_map": "passed",
+    "default_skeleton_and_visceral_glb_load": "passed",
+    "all_five_3d_systems": "passed",
+    "skull_region": "28 selected model elements",
+    "thoracic_region": "58 selected model elements",
+    "vertebral_region": "24 selected model elements",
+    "intestinal_region": "9 selected model elements",
+    "pelvic_region": "4 selected model elements",
+    "direct_mesh_picking": "passed",
+    "selection_isolation": "passed",
+    "opacity_control": "passed; 8% and 100%",
+    "front_and_back_camera": "passed",
+    "common_view_reset": "passed",
+    "fascia_visibility_toggle": "passed",
+    "mobile_390x844": "passed; clientWidth equals scrollWidth (375)",
+    "console_errors": 0
+  },
+  "media_checks": {
+    "frames": 225,
+    "fps": 15,
+    "seconds": 15,
+    "resolution": [800, 900],
+    "gif_infinite_loop": true,
+    "gif_first_last_identical": true,
+    "mp4_full_decode": "passed"
+  },
+  "asset_checks": {
+    "systems": 5,
+    "source_views": 3,
+    "glb_sha256": "verified against pinned downloaded originals",
+    "server_glb_and_wasm_mime": "passed",
+    "video_byte_range": "passed"
+  }
+}

@@ -1,0 +1,32 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f2f1e9">
+<title>Human Anatomy — интерактивный атлас</title><meta name="description" content="Исходная анатомическая иллюстрация и открытая 3D-модель: системы тела, выделение структур и увеличенные детали.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23295f4c'/%3E%3Cpath d='M20 8v24M12 17h16M15 11l5-3 5 3M12 30l8-5 8 5' stroke='%23eeeade' fill='none' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
+<script type="module" src="app.js"></script>
+</head><body>
+<header class="site-header"><a class="brand" href="./"><svg viewBox="0 0 30 34" aria-hidden="true"><path d="M15 3v28M8 11l7-4 7 4M5 17l10-4 10 4M6 22l9-3 9 3M9 30l6-5 6 5"/></svg><span>ANATOMY <b>/</b> HUMAN ATLAS</span></a><span class="header-status"><i></i> ЛОКАЛЬНАЯ ВЕРСИЯ <span>ATLAS 002</span></span></header>
+<main><section class="intro"><div><p class="eyebrow">ОТ ЦЕЛОГО К ДЕТАЛЯМ</p><h1>Тело.<span> Слой за слоем.</span></h1></div><div class="intro-aside"><p>Исследуйте иллюстрацию и объёмную анатомию.<br>Выберите систему, выделите структуру, рассмотрите ближе.</p><nav class="downloads" aria-label="Экспорты иллюстрации"><a href="assets/human-anatomy.mp4" download>MP4 ↗</a><a href="assets/human-anatomy.gif" download>GIF ↓</a><a href="PROMPT.md" target="_blank" rel="noopener">Промпт ↗</a></nav></div></section>
+<section class="lab" aria-label="Анатомическая лаборатория">
+ <div class="main-stage">
+  <div class="view-bar"><div class="view-tabs" role="group" aria-label="Режим просмотра"><button id="mode-illustration" class="active" type="button" aria-pressed="true">01 <span>Иллюстрация</span></button><button id="mode-model" type="button" aria-pressed="false">02 <span>3D-анатомия</span></button></div><span id="view-tag">ORIGINAL PLATE / 3 VIEWS</span></div>
+  <nav id="stages" class="stages" aria-label="Этапы автопоказа"></nav>
+  <div class="view-3d-hint" id="model-hint" hidden><span>3D / Z-ANATOMY</span><span>Потяните для вращения · Колесо для приближения</span></div>
+  <div class="viewport" id="viewport"><canvas id="illustration" width="800" height="760" role="img" aria-label="Исходная анатомическая иллюстрация с подсветкой областей"></canvas><canvas id="model" role="img" aria-label="Интерактивная 3D-модель человеческого тела" hidden></canvas><div class="stage-label"><span id="stage-kicker">01 / ACQUIRE</span><h2 id="stage-title">Общий вид</h2><p id="stage-caption">Исходная иллюстрация</p></div><div class="view-stamp" id="view-stamp">233 × 480 / SOURCE PRESERVED</div><div class="model-loading" id="model-loading" hidden><span class="spinner"></span><strong id="model-status">Подготовка 3D-модели…</strong></div><div class="model-error" id="model-error" hidden></div></div>
+  <div class="transport" id="transport"><button id="play" aria-label="Пауза" type="button">Ⅱ</button><span id="elapsed">00:00</span><input id="timeline" type="range" min="0" max="14.999" step="0.001" value="0" aria-label="Позиция в 15-секундном автопоказе"><span>00:15</span><button id="restart" type="button" aria-label="Начать сначала">↺</button><button id="loop" type="button" aria-pressed="true">↻ Цикл</button></div>
+  <div id="model-controls" class="model-controls" hidden><button id="camera-front" type="button">Спереди</button><button id="camera-back" type="button">Сзади</button><button id="auto-rotate" type="button" aria-pressed="false">↻ Вращение</button><button id="fascia" type="button" aria-pressed="false" title="Показать фасции из мышечного набора">Оболочки</button><button id="camera-reset" type="button">↺ Общий вид</button></div>
+  <div class="stage-footer"><span id="mode-note">АВТОПОКАЗ / 15 СЕКУНД</span><span>УЧЕБНЫЙ АТЛАС · БЕЗ ДИАГНОСТИКИ</span></div>
+ </div>
+ <aside class="inspector" aria-label="Системы и выбранная структура">
+  <div class="systems-block"><p class="eyebrow">СИСТЕМЫ ТЕЛА</p><div id="systems" class="systems" role="group" aria-label="Переключение анатомических систем"></div><p class="system-hint" id="system-hint">В иллюстрации переключаются три исходных вида.</p><div id="opacity-control" class="opacity-control" hidden><label for="opacity">Непрозрачность слоёв <span id="opacity-value">100%</span></label><input id="opacity" type="range" min="0.08" max="1" step="0.01" value="1"></div></div>
+  <div class="parts-header"><h2>Рассмотреть ближе</h2><span>05 ОБЛАСТЕЙ</span></div><div id="parts" class="parts" role="group" aria-label="Выбор анатомической области"></div>
+  <section class="readout" aria-live="polite"><p class="eyebrow" id="readout-label">ОБЛАСТЬ АТЛАСА</p><h3 id="readout-title">Общий вид</h3><p id="readout-description">Выберите область на изображении или в списке справа.</p><p class="source-name" id="source-name"></p><div class="selection-actions"><button id="isolate" type="button" aria-pressed="false" hidden>Изолировать</button><button id="clear-selection" type="button" hidden>Показать целиком</button></div></section>
+  <div class="locator"><canvas id="body-map" width="93" height="170" role="img" aria-label="Карта положения выбранной области в теле"></canvas><div><p class="eyebrow">ГДЕ ЭТО НАХОДИТСЯ</p><strong id="map-region">Всё тело</strong><p>Выбранная область отмечена на мини-карте.</p></div></div>
+ </aside>
+</section>
+<section class="guide"><p><kbd>Пробел</kbd> пауза <span>·</span> <kbd>Esc</kbd> общий вид</p><p id="guide-copy">Иллюстрация остаётся исходной. 3D-модель открывается отдельно.</p></section>
+<section class="sources-strip"><div><span>01 / ОРИГИНАЛ</span><p>Три предоставленных анатомических вида</p></div><div><span>02 / ОБЪЁМ</span><p>Z-Anatomy · BodyParts3D · 5 систем</p></div><div><span>03 / ИССЛЕДОВАНИЕ</span><p>Слои · прозрачность · выбор структур</p></div></section>
+</main>
+<footer><span>HUMAN ANATOMY <b>/</b> LOCAL EDITION</span><a href="CREDITS.html" target="_blank" rel="noopener">Источники и условия использования ↗</a><span>Иллюстрация и 3D — разные анатомические представления</span></footer>
+</body></html>

@@ -1,0 +1,8 @@
+{
+ "name":"human-anatomy-inspector",
+ "version":"1.0.0",
+ "private":true,
+ "type":"module",
+ "scripts":{"start":"node serve.mjs","test":"node scripts/validate.mjs"},
+ "engines":{"node":">=20"}
+}
